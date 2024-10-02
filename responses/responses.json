@@ -1,0 +1,24 @@
+{
+    "greetings": {
+        "hello": "Hello! How can I assist you today?",
+        "hi": "Hi there! How can I help you?"
+    },
+    "insurance": {
+        "car": "Our car insurance covers damages, liability, and theft. Would you like a quote or more details on our different plans?",
+        "home": "We offer home insurance that covers everything from fire and theft to water damage. Would you like to know more?",
+        "life": "Our life insurance plans are designed to provide financial security for your family. We offer whole life, term life, and other options. Would you like more details?",
+        "health": "We provide comprehensive health insurance plans, covering everything from routine check-ups to major medical treatments. How can I assist you?",
+        "travel": "Our travel insurance plans cover trip cancellations, medical emergencies, and lost luggage. Are you interested in a policy for an upcoming trip?",
+        "pet": "Our pet insurance plans cover accidents, illnesses, and wellness care for your pets. Would you like a quote?",
+        "business": "We offer business insurance for small, medium, and large businesses, including liability and property coverage. How can we help you?",
+        "general": "We offer a wide range of insurance services. Could you specify which type of insurance you're interested in?"
+
+    },
+    "farewell": {
+        "bye": "Goodbye! Have a great day!",
+        "thanks": "You're welcome! If you have more questions, feel free to ask."
+    },
+    "more_info": {
+        "link": "For more information, <a href='http://localhost/chat_bot/api/more-info.php' target='_blank'>click here</a>."
+    }
+}
