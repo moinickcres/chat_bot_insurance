@@ -5,7 +5,7 @@ use \Firebase\JWT\JWT;
 
 session_start();
 
-$secretKey = "your-secret-key";  // Use a strong, secure key
+$secretKey = "your-secret-key";  // Use a secure key to sign the JWT
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -16,25 +16,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([':username' => $username]);
     $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Verify the password (you should hash passwords in production)
-    if ($admin && $password === $admin['password']) {
-        // Create the payload for the JWT
+    // Verify the password
+    if ($admin && password_verify($password, $admin['password'])) {
+        // Password is valid, create the payload for the JWT
         $payload = [
             'iss' => 'yourdomain.com',  // Issuer
             'iat' => time(),            // Issued at
             'exp' => time() + 3600,     // Token expires in 1 hour
-            'admin_id' => $admin['id']  // Admin ID
+            'admin_id' => $admin['id'], // Admin ID from database
+            'username' => $admin['username'] // Admin username
         ];
 
-        // Encode the payload to create a JWT
-        $jwt = JWT::encode($payload, $secretKey);
+        // Generate the JWT
+        $jwt = JWT::encode($payload, $secretKey, 'HS256');
 
-        // Set the JWT as a cookie
-        setcookie("admin_token", $jwt, time() + 3600, "/", "", false, true);  // Set as HTTP only cookie
+        // Send the JWT as a response (usually in a header or cookie)
+        setcookie("admin_token", $jwt, time() + 3600, "/", "", false, true); // HTTP only cookie
+
+        // Redirect to admin.php after successful login
         header('Location: admin.php');
         exit;
     } else {
-        echo "Invalid login!";
+        echo "Invalid username or password!";
     }
 }
 ?>
